@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple API Client (как Postman)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Simple API Client</h1>
+        
+        <div class="request-section">
+            <select id="method">
+                <option>GET</option>
+                <option>POST</option>
+                <option>PUT</option>
+                <option>PATCH</option>
+                <option>DELETE</option>
+            </select>
+            <input type="text" id="url" placeholder="https://example.com/api" value="https://jsonplaceholder.typicode.com/posts/1">
+            <button id="send">Отправить</button>
+        </div>
+        
+        <div class="tabs">
+            <button class="tab" data-tab="params">Params</button>
+            <button class="tab active" data-tab="authorization">Authorization</button>
+            <button class="tab" data-tab="headers">Headers</button>
+            <button class="tab" data-tab="body">Body</button>
+        </div>
+        
+        <div id="params" class="tab-content">
+            <table id="params-table">
+                <thead><tr><th>Key</th><th>Value</th><th></th></tr></thead>
+                <tbody></tbody>
+            </table>
+            <button class="add-row" data-table="params">+ Добавить параметр</button>
+        </div>
+        
+        <div id="authorization" class="tab-content active">
+            <select id="auth-type">
+                <option value="noauth">No Auth</option>
+                <option value="basic">Basic Auth</option>
+                <option value="bearer">Bearer Token</option>
+                <option value="apikey">API Key</option>
+            </select>
+
+            <div class="auth-section" data-auth="basic">
+                <label>Username:</label>
+                <input type="text" id="basic-username">
+                <label>Password:</label>
+                <input type="password" id="basic-password">
+            </div>
+
+            <div class="auth-section" data-auth="bearer" style="display:none;">
+                <label>Token:</label>
+                <input type="text" id="bearer-token" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...">
+            </div>
+
+            <div class="auth-section" data-auth="apikey" style="display:none;">
+                <label>Key:</label>
+                <input type="text" id="apikey-key" value="X-API-Key">
+                <label>Value:</label>
+                <input type="text" id="apikey-value">
+                <label>Add to:</label>
+                <select id="apikey-addto">
+                    <option value="header">Header</option>
+                    <option value="query">Query Params</option>
+                </select>
+            </div>
+        </div>
+        
+        <div id="headers" class="tab-content">
+            <table id="headers-table">
+                <thead><tr><th>Key</th><th>Value</th><th></th></tr></thead>
+                <tbody>
+                    <tr><td>Content-Type</td><td>application/json</td><td><button class="remove">×</button></td></tr>
+                </tbody>
+            </table>
+            <button class="add-row" data-table="headers">+ Добавить заголовок</button>
+        </div>
+        
+        <div id="body" class="tab-content">
+            <textarea id="body-text" placeholder='{"key": "value"}'></textarea>
+        </div>
+        
+        <div class="response-section">
+            <h2>Ответ</h2>
+            <pre id="response"></pre>
+        </div>
+        
+        <div class="history-section">
+            <h2>История</h2>
+            <ul id="history-list"></ul>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
